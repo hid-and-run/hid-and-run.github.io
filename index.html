@@ -11,8 +11,9 @@
     </style>
     <script>
     async function poc() {
-      let [device] = await navigator.hid.requestDevice({ filters : [] });
-      console.log(`Device with name "${device.productName}" is now accessible.`);
+      let devices = await navigator.hid.requestDevice({ filters : [] });
+      if (devices)
+        console.log(`Device with name "${devices[0].productName}" is now accessible.`);
       let copyText = document.querySelector("#input");
       copyText.select();
       document.execCommand("copy");
