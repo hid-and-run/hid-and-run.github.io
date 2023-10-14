@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      html, body {
-          margin: 0;
-          height: 100%;
+      body {
+        width: 100vw;
+        height: 100vh;
+        font-size: 2rem;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+      }
+      body > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      #content {
+        position: absolute;
+        left: -200vw;
       }
     </style>
     <script>
-    async function poc() {
-      let devices = await navigator.hid.requestDevice({ filters : [] });
-      if (devices)
-        console.log(`Device with name "${devices[0].productName}" is now accessible.`);
-      let copyText = document.querySelector("#input");
-      copyText.select();
-      document.execCommand("copy");
-    }
+      async function copy() {
+        let copyText = document.querySelector("#content");
+        copyText.select();
+        document.execCommand("copy");
+      }
     </script>
   </head>
-  <body onclick="poc()">
-  <p>
-    This is a full-screen body. Click anywhere to demonstrate WebHID and clipboard. Just select any device, it will not be accessed.
-  </p>
-  <textarea id="input" type="text" style="position: absolute; left: -200vw;">Your clipboard was changed :)</textarea>
+  <body onclick="copy()">
+    <div>
+      <p>
+        Click anywhere on this page to change the content of your clipboard.
+      </p>
+    </div>
+    <textarea id="content" type="text">We have just updated your clipboard! :)</textarea>
   </body>
 </html>
