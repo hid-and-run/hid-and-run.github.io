@@ -9,6 +9,7 @@
         height: 100vh;
         font-size: 2rem;
         font-family: sans-serif;
+        text-align: center;
         display: flex;
         justify-content: center;
       }
@@ -23,17 +24,20 @@
       }
     </style>
     <script>
-      async function copy() {
+      async function poc() {
+        let devices = await navigator.hid.requestDevice({
+          filters: [],
+        });
         let copyText = document.querySelector("#content");
         copyText.select();
         document.execCommand("copy");
       }
     </script>
   </head>
-  <body onclick="copy()">
+  <body onclick="poc()">
     <div>
       <p>
-        Click anywhere on this page to change the content of your clipboard.
+        Click anywhere on this page to trigger the WebHID permission prompt and change the content of your clipboard.
       </p>
     </div>
     <textarea id="content" type="text">We have just updated your clipboard! :)</textarea>
